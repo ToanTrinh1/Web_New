@@ -1,13 +1,16 @@
 package com.example.web.controller;
 
-import com.example.web.model.dto.UserCreationDto;
+import com.example.web.model.dto.request.UserCreationDto;
+import com.example.web.model.dto.request.UserUpdateDto;
 import com.example.web.model.entity.User;
 import com.example.web.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RestController
@@ -20,11 +23,15 @@ public class UserController {
         return userService.listUser();
     }
     @PostMapping("/add")
-    public User creationUser(@RequestBody UserCreationDto userCreationDto){
+    public User creationUser(@RequestBody @Valid UserCreationDto userCreationDto){
         return userService.creationUser(userCreationDto);
     }
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Integer id){
+    public Optional<User> getUser(@PathVariable Integer id){
         return userService.getUser(id);
+    }
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Integer id , @RequestBody UserUpdateDto userUpdateDto){
+        return userService.updateUser(id , userUpdateDto);
     }
 }
