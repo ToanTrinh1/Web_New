@@ -1,12 +1,14 @@
 package com.example.web.model.dto.response;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthenticationResponse {
-    private boolean authenticated;
+    String token;
+    boolean authenticated;
 }
