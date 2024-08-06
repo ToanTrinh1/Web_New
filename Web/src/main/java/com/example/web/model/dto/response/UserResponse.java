@@ -1,7 +1,5 @@
-package com.example.web.model.dto.request;
+package com.example.web.model.dto.response;
 
-
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +9,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreationDto {
+
+public class UserResponse {
+    private Integer id;
     private String fullName;
     private String email;
     private String phone;
     private String address;
     private String username;
-    @Size(min = 3 , message = "Password must be at least 3 character ")
     private String password;
     private String role;
 }

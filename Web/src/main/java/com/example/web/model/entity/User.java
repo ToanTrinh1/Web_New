@@ -1,16 +1,17 @@
 package com.example.web.model.entity;
 
+import com.example.web.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "user_01")
 public class User {
     @Id
@@ -29,7 +30,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "role")
-    private String role;
+    private Set<Role> roles;
 
 
 }

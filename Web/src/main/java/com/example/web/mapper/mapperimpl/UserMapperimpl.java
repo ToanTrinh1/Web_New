@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component;
 public class UserMapperimpl implements UserMapper {
     @Override
     public User toUser(UserCreationDto userCreationDto) {
-        if (userCreationDto == null) {
-            return null;
-        } else {
             User user = new User();
             user.setFullName(userCreationDto.getFullName());
             user.setEmail(userCreationDto.getEmail());
@@ -22,7 +19,7 @@ public class UserMapperimpl implements UserMapper {
             user.setUsername(userCreationDto.getUsername());
             user.setPassword(userCreationDto.getPassword());
             return user;
-        }
+
     }
 
     @Override

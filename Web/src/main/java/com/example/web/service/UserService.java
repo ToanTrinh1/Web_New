@@ -2,6 +2,7 @@ package com.example.web.service;
 
 import com.example.web.model.dto.request.UserCreationDto;
 import com.example.web.model.dto.request.UserUpdateDto;
+import com.example.web.model.dto.response.UserResponse;
 import com.example.web.model.entity.User;
 
 import java.util.List;
