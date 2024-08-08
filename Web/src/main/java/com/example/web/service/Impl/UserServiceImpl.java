@@ -4,13 +4,14 @@ import com.example.web.enums.Role;
 import com.example.web.mapper.UserMapper;
 import com.example.web.model.dto.request.UserCreationDto;
 import com.example.web.model.dto.request.UserUpdateDto;
-import com.example.web.model.dto.response.UserResponse;
 import com.example.web.model.entity.User;
 import com.example.web.repository.UserRepository;
 import com.example.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public Optional<User> getUser() {
+        return getUser(null);
+    }
+
     @Override
+    @PostAuthorize("returnObject.get().username == authentication.name")
     public Optional<User> getUser(Integer id) {
         return Optional.ofNullable(userRepository.findByid(id)).orElseThrow(() -> new RuntimeException("ko tim thay"));
     }
@@ -52,7 +58,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> listUser() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User getMyInfor() {
+        var context = SecurityContextHolder.getContext();
+        String name = context.getAuthentication().getName();
+        return userRepository.findByUsername(name)
+                .orElseThrow(() -> new RuntimeException("Không có thông tin"));
     }
 }

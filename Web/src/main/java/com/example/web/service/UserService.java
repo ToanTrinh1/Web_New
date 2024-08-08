@@ -2,7 +2,6 @@ package com.example.web.service;
 
 import com.example.web.model.dto.request.UserCreationDto;
 import com.example.web.model.dto.request.UserUpdateDto;
-import com.example.web.model.dto.response.UserResponse;
 import com.example.web.model.entity.User;
 
 import java.util.List;
@@ -13,4 +12,5 @@ public interface UserService {
     Optional<User> getUser(Integer id);
     User updateUser(Integer id , UserUpdateDto userUpdateDto);
     List<User> listUser();
+    User getMyInfor();
 }

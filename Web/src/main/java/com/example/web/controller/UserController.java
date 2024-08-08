@@ -37,6 +37,10 @@ public class UserController {
     public Optional<User> getUser(@PathVariable Integer id){
         return userService.getUser(id);
     }
+    @GetMapping("/infor")
+    public Optional<User> getMyinfor(){
+        return Optional.ofNullable(userService.getMyInfor());
+    }
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Integer id , @RequestBody UserUpdateDto userUpdateDto){
         return userService.updateUser(id , userUpdateDto);
